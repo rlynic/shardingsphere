@@ -17,71 +17,76 @@
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion><build><plugins><plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><configuration><source>8</source><target>8</target></configuration></plugin></plugins></build>
     <parent>
         <groupId>org.apache.shardingsphere</groupId>
         <artifactId>sharding-core</artifactId>
         <version>4.0.0</version>
     </parent>
     <artifactId>sharding-core-rewrite</artifactId>
+    <version>4.0.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
+
+    <properties>
+        <sharding.version>4.0.0</sharding.version>
+    </properties>
     
     <dependencies>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-core-route</artifactId>
-            <version>${project.version}</version>
+            <version>${sharding.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>encrypt-core-rewrite</artifactId>
-            <version>${project.version}</version>
+            <version>${sharding.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>shardingsphere-sql-parser-relation</artifactId>
-            <version>${project.version}</version>
+            <version>${sharding.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>shardingsphere-rewrite-engine</artifactId>
-            <version>${project.version}</version>
+            <version>${sharding.version}</version>
         </dependency>
         
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>shardingsphere-rewrite-test</artifactId>
-            <version>${project.version}</version>
+            <version>${sharding.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>shardingsphere-sql-parser-sql92</artifactId>
-            <version>${project.version}</version>
+            <version>${sharding.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>shardingsphere-sql-parser-mysql</artifactId>
-            <version>${project.version}</version>
+            <version>${sharding.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>shardingsphere-sql-parser-postgresql</artifactId>
-            <version>${project.version}</version>
+            <version>${sharding.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>shardingsphere-sql-parser-oracle</artifactId>
-            <version>${project.version}</version>
+            <version>${sharding.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>shardingsphere-sql-parser-sqlserver</artifactId>
-            <version>${project.version}</version>
+            <version>${sharding.version}</version>
             <scope>test</scope>
         </dependency>
         

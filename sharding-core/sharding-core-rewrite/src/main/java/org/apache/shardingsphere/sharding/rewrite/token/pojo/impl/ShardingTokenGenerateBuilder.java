@@ -18,6 +18,7 @@
 package org.apache.shardingsphere.sharding.rewrite.token.pojo.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.shardingsphere.core.route.SQLRouteResult;
 import org.apache.shardingsphere.core.rule.ShardingRule;
 import org.apache.shardingsphere.sharding.rewrite.token.generator.impl.OffsetTokenGenerator;
@@ -36,6 +37,7 @@ import org.apache.shardingsphere.sharding.rewrite.token.generator.impl.keygen.Ge
 import org.apache.shardingsphere.sharding.rewrite.token.generator.impl.keygen.GeneratedKeyForUseDefaultInsertColumnsTokenGenerator;
 import org.apache.shardingsphere.sharding.rewrite.token.generator.impl.keygen.GeneratedKeyInsertColumnTokenGenerator;
 import org.apache.shardingsphere.sharding.rewrite.token.generator.impl.keygen.GeneratedKeyInsertValuesTokenGenerator;
+import org.apache.shardingsphere.spi.NewInstanceServiceLoader;
 import org.apache.shardingsphere.underlying.rewrite.sql.token.generator.SQLTokenGenerator;
 import org.apache.shardingsphere.underlying.rewrite.sql.token.generator.builder.SQLTokenGeneratorBuilder;
 
@@ -69,7 +71,8 @@ public final class ShardingTokenGenerateBuilder implements SQLTokenGeneratorBuil
     }
     
     private Collection<SQLTokenGenerator> buildSQLTokenGenerators() {
-        Collection<SQLTokenGenerator> result = new LinkedList<>();
+        final Collection<SQLTokenGenerator> result = new LinkedList<>();
+
         addSQLTokenGenerator(result, new TableTokenGenerator());
         addSQLTokenGenerator(result, new DistinctProjectionPrefixTokenGenerator());
         addSQLTokenGenerator(result, new ProjectionsTokenGenerator());
@@ -83,6 +86,12 @@ public final class ShardingTokenGenerateBuilder implements SQLTokenGeneratorBuil
         addSQLTokenGenerator(result, new GeneratedKeyAssignmentTokenGenerator());
         addSQLTokenGenerator(result, new ShardingInsertValuesTokenGenerator());
         addSQLTokenGenerator(result, new GeneratedKeyInsertValuesTokenGenerator());
+
+        Collection<SQLTokenGenerator> sqlTokenGenerators = NewInstanceServiceLoader.newServiceInstances(SQLTokenGenerator.class);
+        if (CollectionUtils.isNotEmpty(sqlTokenGenerators)) {
+            sqlTokenGenerators.forEach(a -> addSQLTokenGenerator(result, a));
+        }
+
         return result;
     }
     
