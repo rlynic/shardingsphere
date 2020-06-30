@@ -50,7 +50,7 @@ public final class ShardingGeneratedKeyInsertValueParameterRewriter implements P
     public void rewrite(final ParameterBuilder parameterBuilder, final SQLStatementContext sqlStatementContext, final List<Object> parameters) {
         Preconditions.checkState(sqlRouteResult.getGeneratedKey().isPresent());
         ((GroupedParameterBuilder) parameterBuilder).setDerivedColumnName(sqlRouteResult.getGeneratedKey().get().getColumnName());
-        Iterator<Comparable<?>> generatedValues = sqlRouteResult.getGeneratedKey().get().getGeneratedValues().descendingIterator();
+        Iterator<Comparable<?>> generatedValues = sqlRouteResult.getGeneratedKey().get().getGeneratedValues().iterator();
         int count = 0;
         int parametersCount = 0;
         for (List<Object> each : ((InsertSQLStatementContext) sqlStatementContext).getGroupedParameters()) {
